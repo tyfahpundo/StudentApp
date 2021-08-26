@@ -1,10 +1,9 @@
 package zw.co.afrosoft.studentapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import zw.co.afrosoft.studentapp.domain.Student;
+import zw.co.afrosoft.studentapp.request.CreateStudentRequest;
 import zw.co.afrosoft.studentapp.response.StudentResponse;
 import zw.co.afrosoft.studentapp.service.StudentService;
 
@@ -17,7 +16,7 @@ public class StudentController {
     @Autowired
     StudentService service;
 
-    @GetMapping("/getAll")
+    @GetMapping("getAll")
     public List<StudentResponse> getAllStudents (){
         List<Student> studentList = service.getAllStudents();
         List<StudentResponse> studentResponseList = new ArrayList<>();
@@ -28,4 +27,10 @@ public class StudentController {
 
         return studentResponseList;
     }
+    @PostMapping("create")
+    public StudentResponse createStudent(@RequestBody CreateStudentRequest createStudentRequest){
+        Student student = service.createStudent(createStudentRequest);
+        return new StudentResponse(student);
+    }
+
 }
