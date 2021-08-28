@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import zw.co.afrosoft.studentapp.domain.Student;
 import zw.co.afrosoft.studentapp.request.CreateStudentRequest;
+import zw.co.afrosoft.studentapp.request.UpdateStudentRequest;
 import zw.co.afrosoft.studentapp.response.StudentResponse;
 import zw.co.afrosoft.studentapp.service.StudentService;
 
@@ -30,6 +31,12 @@ public class StudentController {
     @PostMapping("create")
     public StudentResponse createStudent(@Valid @RequestBody CreateStudentRequest createStudentRequest){
         Student student = service.createStudent(createStudentRequest);
+        return new StudentResponse(student);
+    }
+    @PutMapping("update")
+    public StudentResponse updateStudent(@Valid @RequestBody UpdateStudentRequest updateStudentRequest){
+        Student student = service.updateStudent(updateStudentRequest);
+
         return new StudentResponse(student);
     }
 
