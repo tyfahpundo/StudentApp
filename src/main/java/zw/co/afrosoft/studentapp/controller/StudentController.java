@@ -7,6 +7,7 @@ import zw.co.afrosoft.studentapp.request.CreateStudentRequest;
 import zw.co.afrosoft.studentapp.response.StudentResponse;
 import zw.co.afrosoft.studentapp.service.StudentService;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,13 +23,12 @@ public class StudentController {
         List<StudentResponse> studentResponseList = new ArrayList<>();
 
         studentList.stream().forEach(student -> {
-           studentResponseList.add(new StudentResponse(student));
+            studentResponseList.add( new StudentResponse(student));
         });
-
         return studentResponseList;
     }
     @PostMapping("create")
-    public StudentResponse createStudent(@RequestBody CreateStudentRequest createStudentRequest){
+    public StudentResponse createStudent(@Valid @RequestBody CreateStudentRequest createStudentRequest){
         Student student = service.createStudent(createStudentRequest);
         return new StudentResponse(student);
     }

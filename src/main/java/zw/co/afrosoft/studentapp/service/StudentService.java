@@ -13,8 +13,8 @@ public class StudentService {
     @Autowired
     StudentRepository studentRepository;
 
-    public List<Student> getAllStudents(){
-       return studentRepository.findAll();
+    public List<Student>getAllStudents(){
+        return studentRepository.findAll();
     }
 
     public Student createStudent(CreateStudentRequest createStudentRequest){
