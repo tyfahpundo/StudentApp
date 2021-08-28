@@ -39,5 +39,9 @@ public class StudentController {
 
         return new StudentResponse(student);
     }
+    @DeleteMapping("delete")
+    public String deleteStudent(@RequestParam Long id){
+        return service.deleteStudent(id);
+    }
 
 }
