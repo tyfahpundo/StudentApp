@@ -21,10 +21,13 @@ public class Student {
     @Column(name = "last_name")
     private String lastName;
     private String email;
+    @Transient
+    private String fullName;
 
     public Student(CreateStudentRequest createStudentRequest){
         this.firstName = createStudentRequest.getFirstName();
         this.lastName = createStudentRequest.getLastName();
         this.email = createStudentRequest.getEmail();
+        this.fullName = createStudentRequest.getFirstName() + " " + createStudentRequest.getLastName();
     }
 }
