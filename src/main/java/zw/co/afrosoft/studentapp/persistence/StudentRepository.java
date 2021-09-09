@@ -1,7 +1,9 @@
 package zw.co.afrosoft.studentapp.persistence;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 import zw.co.afrosoft.studentapp.domain.Student;
 
 import java.util.List;
@@ -14,6 +16,14 @@ public interface StudentRepository extends JpaRepository<Student,Long> {
     List<Student> findByFirstNameStartsWith(String firstName);
 
     //JPQL
-//    @Query("From Student where firstName = :firstName and lastName = : lastName")
-//    Student getByFirstNameAndLastName(String firstName, String lastName);
+    /*
+    @Query("From Student where firstName = :firstName and lastName = : lastName")
+    Student getByFirstNameAndLastName(String firstName, String lastName);
+     */
+   /*
+   @Modifying
+    @Transactional
+    @Query("Update Student set firstName =:firstName where id =:Id")
+    void updateFirstName(Long id ,String firstName);
+    */
 }
