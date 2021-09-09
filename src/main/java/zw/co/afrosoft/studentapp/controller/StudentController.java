@@ -68,5 +68,16 @@ public class StudentController {
         });
         return studentResponseList;
     }
+    @GetMapping("startsWith/{firstName}")
+    public List<StudentResponse> getByFirstNameStartsWith(@PathVariable String firstName) {
+        List<Student> studentList = service.getByFirstNameStartsWith(firstName);
+
+        List<StudentResponse> studentResponseList = new ArrayList<>();
+
+        studentList.stream().forEach(student -> {
+            studentResponseList.add(new StudentResponse(student));
+        });
+        return studentResponseList;
+    }
 
 }

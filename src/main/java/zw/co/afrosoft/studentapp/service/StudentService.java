@@ -47,4 +47,8 @@ public class StudentService {
 
         return studentRepository.findByFirstNameContains(firstName);
     }
+    public List<Student> getByFirstNameStartsWith(String firstName){
+
+        return studentRepository.findByFirstNameStartsWith(firstName);
+    }
 }
