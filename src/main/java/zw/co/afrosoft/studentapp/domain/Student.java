@@ -23,6 +23,9 @@ public class Student {
     private String email;
     @Transient
     private String fullName;
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     public Student(CreateStudentRequest createStudentRequest){
         this.firstName = createStudentRequest.getFirstName();
