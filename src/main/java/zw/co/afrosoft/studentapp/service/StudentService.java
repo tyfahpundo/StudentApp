@@ -63,4 +63,7 @@ public class StudentService {
 
         return studentRepository.findByFirstNameStartsWith(firstName);
     }
+    public List<Student> getByAddress(String city){
+        return studentRepository.findByAddressCity(city);
+    }
 }

@@ -79,5 +79,15 @@ public class StudentController {
         });
         return studentResponseList;
     }
+    @GetMapping("getByCity/{city}")
+    public List<StudentResponse> getByCity(@PathVariable String city){
+        List<Student> studentList = service.getByAddress(city);
+        List<StudentResponse> studentResponseList = new ArrayList<>();
+
+        studentList.stream().forEach(student -> {
+            studentResponseList.add(new StudentResponse(student));
+        });
+        return studentResponseList;
+    }
 
 }

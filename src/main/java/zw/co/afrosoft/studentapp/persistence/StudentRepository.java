@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
+import zw.co.afrosoft.studentapp.domain.Address;
 import zw.co.afrosoft.studentapp.domain.Student;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public interface StudentRepository extends JpaRepository<Student,Long> {
     Student findByFirstNameAndLastName(String firstName, String lastName);
     List<Student> findByFirstNameContains(String firstName);
     List<Student> findByFirstNameStartsWith(String firstName);
+    List<Student> findByAddressCity(String city);
 
     //JPQL
     /*
