@@ -4,11 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import zw.co.afrosoft.studentapp.domain.Address;
 import zw.co.afrosoft.studentapp.domain.Student;
+import zw.co.afrosoft.studentapp.domain.Subject;
 import zw.co.afrosoft.studentapp.persistence.AddressRepository;
 import zw.co.afrosoft.studentapp.persistence.StudentRepository;
+import zw.co.afrosoft.studentapp.persistence.SubjectRepository;
 import zw.co.afrosoft.studentapp.request.CreateStudentRequest;
+import zw.co.afrosoft.studentapp.request.CreateSubjectRequest;
 import zw.co.afrosoft.studentapp.request.UpdateStudentRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,6 +21,8 @@ public class StudentService {
     StudentRepository studentRepository;
     @Autowired
     AddressRepository addressRepository;
+    @Autowired
+    SubjectRepository subjectRepository;
 
     public List<Student>getAllStudents(){
         return studentRepository.findAll();
@@ -33,6 +39,20 @@ public class StudentService {
 
         student.setAddress(address);
         student = studentRepository.save(student);
+
+        List<Subject> subjectList = new ArrayList<>();
+        if(createStudentRequest.getSubjects() != null){
+            for(CreateSubjectRequest createSubjectRequest : createStudentRequest.getSubjects()){
+                Subject subject = new Subject();
+                subject.setSubjectName(createSubjectRequest.getSubjectName());
+                subject.setMarksObtained(createSubjectRequest.getMarksObtained());
+                subject.setStudent(student);
+
+                subjectList.add(subject);
+            }
+            subjectRepository.saveAll(subjectList);
+        }
+        student.setSubjects(subjectList);
         return student;
     }
     public Student updateStudent(UpdateStudentRequest updateStudentRequest){
