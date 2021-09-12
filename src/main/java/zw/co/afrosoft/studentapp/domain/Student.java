@@ -6,6 +6,7 @@ import lombok.Setter;
 import zw.co.afrosoft.studentapp.request.CreateStudentRequest;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,6 +27,9 @@ public class Student {
     @OneToOne
     @JoinColumn(name = "address_id")
     private Address address;
+
+    @OneToMany(mappedBy = "student")
+    private List<Subject> subjects;
 
     public Student(CreateStudentRequest createStudentRequest){
         this.firstName = createStudentRequest.getFirstName();
